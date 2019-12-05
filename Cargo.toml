@@ -1,0 +1,6 @@
+[package]
+name = "oss_advent_code_19"
+version = "0.1.0"
+authors = ["OssFate <mantis1512@gmail.com>"]
+
+[dependencies]
