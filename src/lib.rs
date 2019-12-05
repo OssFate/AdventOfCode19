@@ -1,8 +1,6 @@
 use std::error::Error;
 use std::fs;
 use std::process;
-// use std::fs::File;
-// use std::io::Read;
 
 mod day;
 
@@ -17,21 +15,15 @@ pub fn work_to_do(args: Vec<String>) -> Result<(), Box<dyn Error>> {
     let file_content = read_file(config.filepath).unwrap();
 
     match config.command.as_ref() {
-        "one" => day::one::do_work(file_content),
-        "two" => day::two::do_work(file_content),
-        "three" => day::three::do_work(file_content),
+        "one" | "1" => day::one::do_work(file_content),
         _ => println!("None option"),
     }
 
     Ok(())
 }
 
-fn read_file(path: String) -> Result<Option<String>, Box<Error + 'static>> {
+fn read_file(path: String) -> Result<Option<String>, Box<dyn Error + 'static>> {
     println!("Reading file: {}\n", path);
-    // let mut f = File::open(path).expect("file not found");
-    // let mut contents = String::new();
-    // f.read_to_string(&mut contents)
-    //     .expect("something went wrong reading the file");
 
     let contents = match fs::read_to_string(path) {
         Ok(result) => result,
@@ -52,7 +44,7 @@ struct Config {
 impl Config {
     fn new(args: &[String]) -> Result<Config, &'static str> {
         if args.len() < 3 {
-            return Err("Not enough arguments, please use this way: \"LOL\"");
+            return Err("Not enough arguments, please use this way: \"{day} {file}\"");
         }
 
         let command = args[1].clone();
