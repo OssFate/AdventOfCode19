@@ -16,6 +16,7 @@ pub fn work_to_do(args: Vec<String>) -> Result<(), Box<dyn Error>> {
 
     match config.command.as_ref() {
         "one" | "1" => day::one::do_work(file_content),
+        "two" | "2" => day::two::do_work(file_content),
         _ => println!("None option"),
     }
 
